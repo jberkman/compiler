@@ -5,7 +5,7 @@
 
 #define ID_LEN_MAX 128
 
-int lexan(compiler_ctx_t *ctx, token_val_t *val) {
+int lexan(compile_ctx_t *ctx, token_val_t *val) {
     memset(val, 0, sizeof(*val));
     do {
         int t = getchar();
@@ -21,6 +21,13 @@ int lexan(compiler_ctx_t *ctx, token_val_t *val) {
         case EOF:
             return TOK_DONE;
 
+        case ':':
+            if ((t = getchar()) == '=') {
+                return TOK_ASSIGN;
+            }
+            ungetc(t, stdin);
+            return ':';
+
         default:
             if (isdigit(t)) {
                 ungetc(t, stdin);
@@ -33,7 +40,7 @@ int lexan(compiler_ctx_t *ctx, token_val_t *val) {
                 while (isalnum(t)) {
                     symbol_name[i] = t;
                     if (++i >= ID_LEN_MAX) {
-                        error(ctx, "compiler error");
+                        error(ctx, "lexer error");
                     }
                     t = getchar();
                 }

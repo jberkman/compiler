@@ -25,7 +25,7 @@ $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Compile source files to object files
-$(OBJDIR)/%.o: src/%.c | $(OBJDIR)
+$(OBJDIR)/%.o: src/%.c include/compiler.h | $(OBJDIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 # Create object files directory if it doesn't exist

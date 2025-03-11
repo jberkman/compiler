@@ -4,16 +4,24 @@
 #define STRMAX 999
 
 static const entry_t keywords[] = {
-    {"div", TOK_DIV},
-    {"mod", TOK_MOD},
-    {NULL, 0},
+    {TOK_ASSIGN, ":="},
+    {TOK_BEGIN, "begin"},
+    {TOK_DIV, "div"},
+    {TOK_DO, "do"},
+    {TOK_END, "end"},
+    {TOK_IF, "if"},
+    {TOK_MOD, "mod"},
+    {TOK_THEN, "then"},
+    {TOK_WHILE, "while"},
+    {.lexptr = NULL},
 };
 
 static entry_t symbols[SYMMAX] = {0};
 static char lexemes[STRMAX] = {0};
 
-void init(compiler_ctx_t *ctx) {
+void init(compile_ctx_t *ctx) {
     ctx->lineno = 1;
+    ctx->label_count = 0;
 
     ctx->symbols = symbols;
     ctx->symbols_max = SYMMAX;

@@ -1,6 +1,8 @@
 #include "compiler.h"
 
-ssize_t lookup(const compiler_ctx_t *ctx, const char *s) {
+#include <stdio.h>
+
+ssize_t lookup(const compile_ctx_t *ctx, const char *s) {
     for (size_t i = 0; i < ctx->symbols_len; ++i) {
         if (strcmp(ctx->symbols[i].lexptr, s) == 0) {
             return i;
@@ -10,7 +12,7 @@ ssize_t lookup(const compiler_ctx_t *ctx, const char *s) {
     return -1;
 }
 
-size_t insert(compiler_ctx_t *ctx, const char *s, token_t token) {
+size_t insert(compile_ctx_t *ctx, const char *s, token_t token) {
     if (ctx->symbols_len + 1 >= ctx->symbols_max) {
         error(ctx, "symbol table full");
     }
