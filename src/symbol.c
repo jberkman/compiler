@@ -1,4 +1,5 @@
-#include "compiler.h"
+#include "error.h"
+#include "symbol.h"
 
 #include <stdio.h>
 

@@ -14,6 +14,9 @@ OBJDIR = bin
 # Object files
 OBJS = $(patsubst src/%.c, $(OBJDIR)/%.o, $(SRCS))
 
+# Dependency files
+DEPS = $(OBJS:.o=.d)
+
 # Executable name
 EXEC = $(OBJDIR)/jcc
 
@@ -25,8 +28,11 @@ $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Compile source files to object files
-$(OBJDIR)/%.o: src/%.c include/compiler.h | $(OBJDIR)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+$(OBJDIR)/%.o: src/%.c | $(OBJDIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
+
+# Include dependency files
+-include $(DEPS)
 
 # Create object files directory if it doesn't exist
 $(OBJDIR):
@@ -34,7 +40,7 @@ $(OBJDIR):
 
 # Clean up build files
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -f $(OBJS) $(EXEC) $(DEPS)
 	rmdir $(OBJDIR)
 
 .PHONY: all clean

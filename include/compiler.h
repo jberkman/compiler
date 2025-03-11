@@ -1,7 +1,7 @@
 #ifndef COMPILER_H
 #define COMPILER_H
 
-#include <string.h>
+#include <stdlib.h>
 
 enum {
     TOK_255 = 0xff,
@@ -19,27 +19,6 @@ enum {
     TOK_THEN,
     TOK_WHILE,
 };
-
-typedef enum {
-    INSTR_HALT,
-    
-    INSTR_ADD,
-    INSTR_ASSIGN,
-    INSTR_COPY,
-    INSTR_DIV,
-    INSTR_FDIV,
-    INSTR_GOFALSE,
-    INSTR_GOTO,
-    INSTR_GOTRUE,
-    INSTR_LABEL,
-    INSTR_LVALUE,
-    INSTR_MOD,
-    INSTR_MUL,
-    INSTR_POP,
-    INSTR_PUSH,
-    INSTR_RVALUE,
-    INSTR_SUB,
-} instr_t;
 
 typedef int token_t;
 
@@ -68,18 +47,5 @@ typedef struct {
 } compile_ctx_t;
 
 #undef CTX_BUFFER
-
-void init(compile_ctx_t *ctx);
-
-void emit(const compile_ctx_t *ctx, instr_t instr, const token_val_t *val);
-
-ssize_t lookup(const compile_ctx_t *ctx, const char *s);
-size_t insert(compile_ctx_t *ctx, const char *s, token_t token);
-
-token_t lexan(compile_ctx_t *ctx, token_val_t *val);
-
-void parse(compile_ctx_t *ctx);
-
-void error(const compile_ctx_t *ctx, const char *msg);
 
 #endif

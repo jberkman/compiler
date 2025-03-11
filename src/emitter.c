@@ -1,4 +1,5 @@
-#include "compiler.h"
+#include "emitter.h"
+#include "error.h"
 
 #include <stdio.h>
 

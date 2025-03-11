@@ -1,4 +1,7 @@
-#include "compiler.h"
+#include "emitter.h"
+#include "error.h"
+#include "lexer.h"
+#include "parser.h"
 
 #include <stdio.h>
 

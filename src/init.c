@@ -1,4 +1,5 @@
-#include "compiler.h"
+#include "init.h"
+#include "symbol.h"
 
 #define SYMMAX 100
 #define STRMAX 999

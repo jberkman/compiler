@@ -1,4 +1,6 @@
-#include "compiler.h"
+#include "error.h"
+#include "lexer.h"
+#include "symbol.h"
 
 #include <ctype.h>
 #include <stdio.h>
