@@ -7,7 +7,7 @@
 
 #define ID_LEN_MAX 128
 
-int lexan(compile_ctx_t *ctx, token_val_t *val) {
+int lexan(compile_ctx_t *ctx, value_t *val) {
     memset(val, 0, sizeof(*val));
     do {
         int t = getchar();
@@ -33,7 +33,7 @@ int lexan(compile_ctx_t *ctx, token_val_t *val) {
         default:
             if (isdigit(t)) {
                 ungetc(t, stdin);
-                scanf("%d", &val->num_val);
+                scanf("%d", &val->int_val);
                 return TOK_NUM;
             
             } else if (isalpha(t)) {
@@ -51,11 +51,11 @@ int lexan(compile_ctx_t *ctx, token_val_t *val) {
                 }
                 ssize_t idx = lookup(ctx, symbol_name);
                 if (idx < 0) {
-                    val->id_val = insert(ctx, symbol_name, TOK_ID);
+                    val->size_t_val = insert(ctx, symbol_name, TOK_ID);
                 } else {
-                    val->id_val = idx;
+                    val->size_t_val = idx;
                 }
-                return ctx->symbols[val->id_val].token;
+                return ctx->symbols[val->size_t_val].token;
             }
 
             return t;

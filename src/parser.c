@@ -8,7 +8,7 @@
 typedef struct {
     compile_ctx_t *parent;
     token_t lookahead;
-    token_val_t val;
+    value_t val;
 } parse_ctx_t;
 
 static void expr(parse_ctx_t *ctx);
@@ -111,8 +111,8 @@ void stmt(parse_ctx_t *ctx) {
         return;
 
     case TOK_IF: {
-        token_val_t out_val = {
-            .label_val = ctx->parent->label_count++,
+        value_t out_val = {
+            .size_t_val = ctx->parent->label_count++,
         };
         match(ctx, TOK_IF);
         expr(ctx);
@@ -124,11 +124,11 @@ void stmt(parse_ctx_t *ctx) {
     }
 
     case TOK_WHILE: {
-        token_val_t test_val = {
-            .label_val = ctx->parent->label_count++,
+        value_t test_val = {
+            .size_t_val = ctx->parent->label_count++,
         };
-        token_val_t out_val = {
-            .label_val = ctx->parent->label_count++,
+        value_t out_val = {
+            .size_t_val = ctx->parent->label_count++,
         };
         emit(ctx->parent, INSTR_LABEL, &test_val);
         match(ctx, TOK_WHILE);

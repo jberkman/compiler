@@ -24,6 +24,6 @@ typedef enum {
     INSTR_SUB,
 } instr_t;
 
-void emit(const compile_ctx_t *ctx, instr_t instr, const token_val_t *val);
+void emit(const compile_ctx_t *ctx, instr_t instr, const value_t *val);
 
 #endif

@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-void emit(const compile_ctx_t *ctx, instr_t instr, const token_val_t *val) {
+void emit(const compile_ctx_t *ctx, instr_t instr, const value_t *val) {
     switch (instr) {
     case INSTR_HALT:
         printf("halt\n");
@@ -30,23 +30,23 @@ void emit(const compile_ctx_t *ctx, instr_t instr, const token_val_t *val) {
         break;
 
     case INSTR_GOFALSE:
-        printf("gofalse label_%zu\n", val->label_val);
+        printf("gofalse label_%zu\n", val->size_t_val);
         break;
 
     case INSTR_GOTO:
-        printf("goto label_%zu\n", val->label_val);
+        printf("goto label_%zu\n", val->size_t_val);
         break;
 
     case INSTR_GOTRUE:
-        printf("gotrue label_%zu\n", val->label_val);
+        printf("gotrue label_%zu\n", val->size_t_val);
         break;
 
     case INSTR_LABEL:
-        printf("label label_%zu\n", val->label_val);
+        printf("label label_%zu\n", val->size_t_val);
         break;
 
     case INSTR_LVALUE:
-        printf("lvalue %s\n", ctx->symbols[val->id_val].lexptr);
+        printf("lvalue %s\n", ctx->symbols[val->size_t_val].lexptr);
         break;
 
     case INSTR_MOD:
@@ -62,11 +62,11 @@ void emit(const compile_ctx_t *ctx, instr_t instr, const token_val_t *val) {
         break;
 
     case INSTR_PUSH:
-        printf("push %d\n", val->num_val);
+        printf("push %d\n", val->int_val);
         break;
 
     case INSTR_RVALUE:
-        printf("rvalue %s\n", ctx->symbols[val->id_val].lexptr);
+        printf("rvalue %s\n", ctx->symbols[val->size_t_val].lexptr);
         break;
 
     case INSTR_SUB:

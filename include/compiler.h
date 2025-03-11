@@ -23,13 +23,12 @@ enum {
 typedef int token_t;
 
 typedef union {
-    int num_val;
-    size_t id_val;
-    size_t label_val;
-} token_val_t;
+    int int_val;
+    size_t size_t_val;
+} value_t;
 
 typedef struct {
-    int token;
+    token_t token;
     char *lexptr;
 } entry_t;
 
